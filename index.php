@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 require_once 'helpers/security.php';
@@ -12,6 +11,7 @@ $fields = isset($_SESSION['fields']) ? $_SESSION['fields'] : [];
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="utf-8">
     <meta name="Author" content="JeanCS">
     <meta name="Keywords" content="contact, form, php">
@@ -20,13 +20,15 @@ $fields = isset($_SESSION['fields']) ? $_SESSION['fields'] : [];
     <title>Contact Form</title>
 
     <link rel="stylesheet" href="css/main.css">
+
 </head>
 <body>
 
     <section class="contact">
+
         <!-- Print errors in a list -->
         <?php if(!empty($errors)): ?>
-            <div class="panel">
+            <div id="errors">
                 <ul>
                     <li>
                         <?php echo implode('</li><li>', $errors); ?>
@@ -36,27 +38,33 @@ $fields = isset($_SESSION['fields']) ? $_SESSION['fields'] : [];
         <?php endif; ?>
 
         <form action="contact.php" method="post" name="ContactForm">
-            <label>
-                Your name *
+            <h1>to: JeanCS</h1>
+
+            <div id="from">
+                <label for="name">* From:</label>
                 <input type="text" name="name" autocomplete="off"
-                    <?php echo isset($fields['name']) ? 'value="' . e($fields['name']) . '"' : ''; ?>
+                    <?php echo isset($fields['name']) ? assignValue($fields['name']) : ''; ?>
                 >
-            </label>
+            </div>
 
-            <label>
-                Your email address *
+            <div id="reply">
+                <label for="email">* Reply:</label>
                 <input type="text" name="email" autocomplete="off"
-                    <?php echo isset($fields['email']) ? 'value="' . e($fields['email']) . '"' : ''; ?>
+                    <?php echo isset($fields['email']) ? assignValue($fields['email']) : '' ?>
                 >
-            </label>
+            </div>
 
-            <label>
-                Your message *
-                <textarea name="message" rows="8"><?php echo isset($fields['message']) ? e($fields['message']) : ''; ?></textarea>
-            </label>
-            <input type="submit" value="Send">
+            <div id="message"></div>
+                <label for="msg_text">* Your message:</label>
+                <textarea id="msg_text" name="message"><?php echo isset($fields['message']) ? sanitizeString($fields['message']) : ''; ?></textarea>
+            </div>
+
+            <div class="btn">
+                <button type="submit">Send your message</button>
+            </div>
 
             <p class="muted">* means a required field</p>
+
         </form>
     </section>
 
