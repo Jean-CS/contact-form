@@ -19,6 +19,8 @@ $fields = isset($_SESSION['fields']) ? $_SESSION['fields'] : [];
 
     <title>Contact Form</title>
 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
     <link rel="stylesheet" href="css/main.css">
 
 </head>
@@ -37,33 +39,28 @@ $fields = isset($_SESSION['fields']) ? $_SESSION['fields'] : [];
             </div>
         <?php endif; ?>
 
-        <form action="contact.php" method="post" name="ContactForm">
-            <h1>to: JeanCS</h1>
+        <form id="contactForm" action="contact.php" method="post" name="ContactForm">
 
             <div id="from">
-                <label for="name">* From:</label>
-                <input type="text" name="name" autocomplete="off"
+                <label for="name"><span class="fontawesome-user"></span></label>
+                <input type="text" name="name" autocomplete="off" placeholder="Your name"
                     <?php echo isset($fields['name']) ? assignValue($fields['name']) : ''; ?>
                 >
             </div>
 
             <div id="reply">
-                <label for="email">* Reply:</label>
-                <input type="text" name="email" autocomplete="off"
+                <label for="email"><span class="fontawesome-envelope"></span></label>
+                <input type="text" name="email" autocomplete="off" placeholder="Your email"
                     <?php echo isset($fields['email']) ? assignValue($fields['email']) : '' ?>
                 >
             </div>
 
             <div id="message"></div>
-                <label for="msg_text">* Your message:</label>
-                <textarea id="msg_text" name="message"><?php echo isset($fields['message']) ? sanitizeString($fields['message']) : ''; ?></textarea>
+                <label for="msg_text"></label>
+                <textarea id="msg_text" name="message" placeholder="Your message here"><?php echo isset($fields['message']) ? sanitizeString($fields['message']) : ''; ?></textarea>
             </div>
 
-            <div class="btn">
-                <button type="submit">Send your message</button>
-            </div>
-
-            <p class="muted">* means a required field</p>
+            <p><input type="submit" value="Send"></p>
 
         </form>
     </section>

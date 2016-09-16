@@ -62,7 +62,7 @@ if (isset($_POST['name'], $_POST['email'], $_POST['message'])) {
         $mail->AddAddress(getenv('MAIL_ADDRESS'), getenv('MAIL_ADDRESS_NAME'));
 
         if ($mail->send()) {
-            header('Location: thanks.php');
+            header('Location: index.php');
             die();
         } else {
             // $errors[] = 'Mailer error: ' . $mail->ErrorInfo;
